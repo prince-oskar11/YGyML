@@ -1,10 +1,3 @@
-self.addEventListener('install', event => {
-  console.log('Service Worker installing.');
-});
-self.addEventListener('activate', event => {
-  console.log('Service Worker activating.');
-});
-self.addEventListener('fetch', event => {
-  // For now, just fetch normally.
-  event.respondWith(fetch(event.request));
-});
+self.addEventListener('install', e => console.log('SW installed'));
+self.addEventListener('activate', e => console.log('SW activated'));
+self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
