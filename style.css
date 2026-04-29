@@ -1,0 +1,107 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #001F3F; /* Navy */
+  color: #fff;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001F3F;
+  padding: 10px 20px;
+  position: relative;
+}
+.header-left {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.nav-icons {
+  display: flex;
+  gap: 10px;
+}
+.nav-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #F5F5DC;
+}
+.profile-icon {
+  position: relative;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+#profileDropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 25px;
+  background-color: #F5F5DC;
+  color: #000;
+  min-width: 120px;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  flex-direction: column;
+  z-index: 1;
+}
+#profileDropdown button {
+  padding: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+#profileDropdown button:hover {
+  background-color: #ddd;
+}
+main {
+  padding: 20px;
+}
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
+button {
+  background-color: #F5F5DC;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover {
+  opacity: 0.9;
+}
+.post {
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.add-to-wishlist {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.home-icon {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gym-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
