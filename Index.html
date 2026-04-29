@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>YGyML Web App</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div class="header-left">YGyML</div>
+  <div class="wishlist-icon" title="Wishlist">❤️</div>
+  <nav class="nav-icons">
+    <button class="nav-btn" data-section="home" title="Home">🏠</button>
+    <button class="nav-btn" data-section="meal" title="Meal Plan">🍽️</button>
+    <button class="nav-btn" data-section="workout" title="Workout Plan">🏋️‍♂️</button>
+  </nav>
+  <div class="profile-icon" id="profileIcon" title="Profile">
+    👤
+    <div id="profileDropdown" class="dropdown-content">
+      <button id="signInBtn">Sign In</button>
+      <button id="signOutBtn" style="display:none;">Sign Out</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home-section" class="section active">
+    <h2>YGyML</h2>
+    <img src="https://images.unsplash.com/photo-1596215432304-0c8a8f7d0b07" alt="Gym Equipment" class="gym-image" />
+  </section>
+
+  <section id="meal-section" class="section">
+    <h2>Meal Plan</h2>
+    <button class="meal-option" data-plan="lose">Lose Fat</button>
+    <button class="meal-option" data-plan="gain">Gain Fat</button>
+    <button class="meal-option" data-plan="build">Build Muscle</button>
+    <div id="mealPlanDetails"></div>
+    <button class="home-icon" data-section="home" title="Home">🏠</button>
+  </section>
+
+  <section id="workout-section" class="section">
+    <h2>Workout Plan</h2>
+    <button class="workout-option" data-type="lose">Lose Fat</button>
+    <button class="workout-option" data-type="gain">Gain Muscle</button>
+    <div id="workoutDetails"></div>
+    <button class="home-icon" data-section="home" title="Home">🏠</button>
+  </section>
+
+  <section id="training-posts-section" class="section">
+    <h2>Training Posts</h2>
+    <div class="post" id="post1">
+      <h3>Post 1: Workout Tips</h3>
+      <button class="add-to-wishlist" data-post="Post 1">❤️ Add to Wishlist</button>
+    </div>
+    <div class="post" id="post2">
+      <h3>Post 2: Nutrition Advice</h3>
+      <button class="add-to-wishlist" data-post="Post 2">❤️ Add to Wishlist</button>
+    </div>
+    <button class="home-icon" data-section="home" title="Home">🏠</button>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
