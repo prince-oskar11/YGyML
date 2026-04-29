@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>YGyML Web App</title>
 <style>
-/* Embedded CSS styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #001F3F; /* Navy */
-  color: #fff;
+  background-color: #001F3F;
+  color: beige;
 }
 header {
   display: flex;
@@ -18,46 +17,47 @@ header {
   align-items: center;
   background-color: #001F3F;
   padding: 10px 20px;
-  position: relative;
 }
 .header-left {
   font-size: 1.5rem;
   font-weight: bold;
 }
-.nav-icons {
+.icons-container {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
 }
-.nav-btn {
-  font-size: 1.5rem;
-  background: none;
-  border: none;
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: beige;
   cursor: pointer;
-  color: #F5F5DC;
 }
-.profile-icon {
+#installIcon {
+  display: none;
+}
+#dailyPlanIcon {
+  display: block;
+}
+#profileIcon {
   position: relative;
-  font-size: 1.5rem;
-  cursor: pointer;
 }
 #profileDropdown {
   display: none;
   position: absolute;
   right: 0;
   top: 25px;
-  background-color: #F5F5DC;
+  background: #F5F5DC;
   color: #000;
-  min-width: 120px;
   border-radius: 4px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  flex-direction: column;
-  z-index: 1;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  z-index: 10;
 }
 #profileDropdown button {
-  padding: 10px;
   width: 100%;
-  background: none;
+  padding: 10px;
   border: none;
+  background: none;
   cursor: pointer;
   text-align: left;
 }
@@ -67,10 +67,10 @@ header {
 main {
   padding: 20px;
 }
-.section {
+section {
   display: none;
 }
-.section.active {
+section.active {
   display: block;
 }
 button {
@@ -91,12 +91,6 @@ button:hover {
   margin-top: 10px;
   border-radius: 8px;
 }
-.add-to-wishlist {
-  background-color: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
 .home-icon {
   background: none;
   border: none;
@@ -107,29 +101,43 @@ button:hover {
   margin-left: auto;
   margin-right: auto;
 }
-.gym-image {
+#training-guide {
+  margin-top: 20px;
+}
+#daily-plan {
+  margin-top: 20px;
+  background: #fff;
+  color: #000;
+  padding: 10px;
+  border-radius: 8px;
+}
+.exercise-img {
   max-width: 100%;
   height: auto;
-  display: block;
-  margin: 20px auto;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 </style>
 </head>
 <body>
 <header>
   <div class="header-left">YGyML</div>
-  <div class="wishlist-icon" title="Wishlist">❤️</div>
-  <nav class="nav-icons">
-    <button class="nav-btn" data-section="home" title="Home">🏠</button>
-    <button class="nav-btn" data-section="meal" title="Meal Plan">🍽️</button>
-    <button class="nav-btn" data-section="workout" title="Workout Plan">🏋️‍♂️</button>
-    <button class="nav-btn" data-section="posts" title="Training Posts">📝</button>
-  </nav>
-  <div class="profile-icon" id="profileIcon" title="Profile">
-    👤
-    <div id="profileDropdown" class="dropdown-content">
-      <button id="signInBtn">Sign In</button>
-      <button id="signOutBtn" style="display:none;">Sign Out</button>
+  <div class="icons-container">
+    <svg id="dailyPlanIcon" class="icon" viewBox="0 0 24 24" title="Daily Plan" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V8h14v13z"/>
+    </svg>
+    <svg id="installIcon" class="icon" viewBox="0 0 24 24" title="Install App" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 20h14v-2H5v2zm7-18L5 9h4v6h6V9h4l-7-7z"/>
+    </svg>
+    <div id="profileIcon" style="cursor:pointer; position:relative;">
+      <svg class="icon" viewBox="0 0 24 24" title="Profile" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+      </svg>
+      <div id="profileDropdown" style="display:none; position:absolute; right:0; top:25px; background:#F5F5DC; color:#000; border-radius:4px; box-shadow:0 0 8px rgba(0,0,0,0.2);">
+        <button id="signInBtn" style="width:100%; padding:10px; border:none; background:none; cursor:pointer;">Sign In</button>
+        <button id="signOutBtn" style="width:100%; padding:10px; border:none; background:none; cursor:pointer; display:none;">Sign Out</button>
+      </div>
     </div>
   </div>
 </header>
@@ -161,82 +169,155 @@ button:hover {
     <h2>Training Posts</h2>
     <div class="post" id="post1">
       <h3>Post 1: Workout Tips</h3>
-      <button class="add-to-wishlist" data-post="Post 1">❤️ Add to Wishlist</button>
     </div>
     <div class="post" id="post2">
       <h3>Post 2: Nutrition Advice</h3>
-      <button class="add-to-wishlist" data-post="Post 2">❤️ Add to Wishlist</button>
     </div>
     <button class="home-icon" data-section="home" title="Home">🏠</button>
   </section>
+
+  <div id="training-guide"></div>
+  <div id="daily-plan"></div>
 </main>
 
 <script>
-  // JavaScript code embedded
-  // Navigation
-  const sections = document.querySelectorAll('.section');
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.onclick = () => {
-      const target = btn.dataset.section;
-      sections.forEach(sec => {
-        sec.classList.toggle('active', sec.id === target + '-section');
-      });
-    };
-  });
-  // Home icon in sections
-  document.querySelectorAll('.home-icon').forEach(btn => {
-    btn.onclick = () => {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById('home-section').classList.add('active');
-    };
-  });
-  // Profile dropdown toggle
-  const profileIcon = document.getElementById('profileIcon');
-  const profileDropdown = document.getElementById('profileDropdown');
-  profileIcon.onclick = () => {
-    profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+const sections = document.querySelectorAll('.section');
+document.querySelectorAll('.home-icon').forEach(btn => {
+  btn.onclick = () => {
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById('home-section').classList.add('active');
   };
-  // Sign in/out
-  const signInBtn = document.getElementById('signInBtn');
-  const signOutBtn = document.getElementById('signOutBtn');
-  signInBtn.onclick = () => {
-    alert('Signed in!');
-    signInBtn.style.display = 'none';
-    signOutBtn.style.display = 'block';
-  };
-  signOutBtn.onclick = () => {
-    if (confirm('Sign out?')) {
-      alert('Signed out!');
-      signInBtn.style.display = 'block';
-      signOutBtn.style.display = 'none';
-    }
-  };
-  // Meal options
-  document.querySelectorAll('.meal-option').forEach(btn => {
-    btn.onclick = () => {
-      document.getElementById('mealPlanDetails').innerHTML = `<p>You selected: ${btn.dataset.plan} plan.</p>`;
-    };
-  });
-  // Workout options
-  document.querySelectorAll('.workout-option').forEach(btn => {
-    btn.onclick = () => {
-      document.getElementById('workoutDetails').innerHTML = `<p>You selected: ${btn.dataset.type} workout plan.</p>`;
-    };
-  });
-  // Wishlist buttons
-  document.querySelectorAll('.add-to-wishlist').forEach(btn => {
-    btn.onclick = () => {
-      alert('Added "' + btn.dataset.post + '" to wishlist!');
-    };
-  });
-  // Register Service Worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('Service Worker registered:', reg))
-        .catch(err => console.log('Service Worker registration failed:', err));
-    });
+});
+const profileIcon = document.getElementById('profileIcon');
+const profileDropdown = document.getElementById('profileDropdown');
+profileIcon.onclick = () => {
+  profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+};
+const signInBtn = document.getElementById('signInBtn');
+const signOutBtn = document.getElementById('signOutBtn');
+signInBtn.onclick = () => {
+  alert('Signed in!');
+  signInBtn.style.display = 'none';
+  signOutBtn.style.display = 'block';
+};
+signOutBtn.onclick = () => {
+  if (confirm('Sign out?')) {
+    alert('Signed out!');
+    signInBtn.style.display = 'block';
+    signOutBtn.style.display = 'none';
   }
+};
+
+document.querySelectorAll('.meal-option').forEach(btn => {
+  btn.onclick = () => {
+    const data = {
+      'lose': {
+        title: 'Lose Fat Plan',
+        description: 'Eat a calorie deficit diet with lean proteins, vegetables, and drink plenty of water.',
+        meals: ['Grilled Chicken Salad', 'Steamed Vegetables', 'Fresh Fruit'],
+        drinks: ['Water', 'Green Tea']
+      },
+      'gain': {
+        title: 'Gain Muscle Plan',
+        description: 'Eat a calorie surplus with protein-rich foods, carbs, and healthy fats.',
+        meals: ['Oatmeal with Nuts', 'Grilled Salmon with Rice', 'Protein Shake'],
+        drinks: ['Milk', 'Smoothies']
+      },
+      'build': {
+        title: 'Build Muscle Plan',
+        description: 'Focus on high-protein foods and complex carbs to support muscle growth.',
+        meals: ['Egg Omelette', 'Chicken Breast with Quinoa', 'Greek Yogurt'],
+        drinks: ['Protein Shake', 'Water']
+      }
+    }[btn.dataset.plan];
+    document.getElementById('mealPlanDetails').innerHTML = `
+      <h3>${data.title}</h3>
+      <p>${data.description}</p>
+      <h4>Sample Meals:</h4>
+      <ul>${data.meals.map(m => `<li>${m}</li>`).join('')}</ul>
+      <h4>Sample Drinks:</h4>
+      <ul>${data.drinks.map(d => `<li>${d}</li>`).join('')}</ul>
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="${data.title}" style="width:100%;max-width:400px;border-radius:8px; margin-top:10px;" />
+    `;
+  };
+});
+
+document.querySelectorAll('.workout-option').forEach(btn => {
+  btn.onclick = () => {
+    const type = btn.dataset.type;
+    const data = {
+      'lose': {
+        title: 'Lose Fat Workout',
+        description: 'Focus on cardio and high-intensity interval training.',
+        exercises: ['Running', 'Jump Rope', 'Cycling']
+      },
+      'gain': {
+        title: 'Gain Muscle Workout',
+        description: 'Strength training with weights and resistance exercises.',
+        exercises: ['Squats', 'Deadlifts', 'Bench Press']
+      }
+    }[type];
+    document.getElementById('workoutDetails').innerHTML = `
+      <h3>${data.title}</h3>
+      <p>${data.description}</p>
+      <h4>Sample Exercises:</h4>
+      <ul>${data.exercises.map(e => `<li>${e}</li>`).join('')}</ul>
+      <img src="https://images.unsplash.com/photo-1571019613449-7ae0f0a5f6b0" alt="${data.title}" style="width:100%;max-width:400px;border-radius:8px; margin-top:10px;" />
+    `;
+  };
+});
+document.querySelector('.workout-option[data-type="gain"]').onclick = () => {
+  document.getElementById('training-guide').innerHTML = `
+    <h2>Gain Muscle Training Guide</h2>
+    <h3>Target Muscles and Exercises</h3>
+    <h4>Chest</h4>
+    <ul>
+      <li>Barbell Bench Press</li>
+      <img src="https://images.unsplash.com/photo-1571019613449-7ae0f0a5f6b0" class="exercise-img" alt="Barbell Bench Press"/>
+      <li>Incline Dumbbell Press</li>
+      <img src="https://images.unsplash.com/photo-1612831455540-5b0a3dceba3b" class="exercise-img" alt="Incline Dumbbell Press"/>
+      <li>Chest Flyes</li>
+      <img src="https://images.unsplash.com/photo-1571019613449-7ae0f0a5f6b0" class="exercise-img" alt="Chest Flyes"/>
+    </ul>
+    <h4>Back</h4>
+    <ul>
+      <li>Pull-Ups</li>
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" class="exercise-img" alt="Pull-Ups"/>
+      <li>Deadlifts</li>
+      <img src="https://images.unsplash.com/photo-1571019613449-7ae0f0a5f6b0" class="exercise-img" alt="Deadlifts"/>
+      <li>Rows</li>
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" class="exercise-img" alt="Rows"/>
+    </ul>
+    <h4>Legs</h4>
+    <ul>
+      <li>Squats</li>
+      <img src="https://images.unsplash.com/photo-1571019613449-7ae0f0a5f6b0" class="exercise-img" alt="Squats"/>
+      <li>Leg Press</li>
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" class="exercise-img" alt="Leg Press"/>
+      <li>Leg Curls</li>
+      <img src="https://images.unsplash.com/photo-1571019613449-7ae0f0a5f6b0" class="exercise-img" alt="Leg Curls"/>
+    </ul>
+    <h4>Shoulders</h4>
+    <ul>
+      <li>Overhead Press</li>
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" class="exercise-img" alt="Overhead Press"/>
+      <li>Lateral Raises</li>
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" class="exercise-img" alt="Lateral Raises"/>
+      <li>Front Raises</li>
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" class="exercise-img" alt="Front Raises"/>
+    </ul>
+    <h4>Arms</h4>
+    <ul>
+      <li>Bicep Curls</li>
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" class="exercise-img" alt="Bicep Curls"/>
+      <li>Tricep Extensions</li>
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" class="exercise-img" alt="Tricep Extensions"/>
+      <li>Hammer Curls</li>
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" class="exercise-img" alt="Hammer Curls"/>
+    </ul>
+    <p>Remember to rest adequately and eat enough protein (~1.6-2.2g per kg of body weight) for muscle growth.</p>
+  `;
+};
 </script>
 </body>
 </html>
