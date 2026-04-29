@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>YGyML Web App</title>
-<link rel="manifest" href="manifest.json" />
 <style>
+/* Embedded CSS styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -172,7 +172,7 @@ button:hover {
 </main>
 
 <script>
-  // JavaScript code embedded for simplicity
+  // JavaScript code embedded
   // Navigation
   const sections = document.querySelectorAll('.section');
   document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -229,6 +229,14 @@ button:hover {
       alert('Added "' + btn.dataset.post + '" to wishlist!');
     };
   });
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registered:', reg))
+        .catch(err => console.log('Service Worker registration failed:', err));
+    });
+  }
 </script>
 </body>
 </html>
